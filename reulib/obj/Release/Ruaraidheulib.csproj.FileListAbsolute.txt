@@ -1,0 +1,7 @@
+X:\Stuff\repos\reulib\Ruaraidheulib\bin\Release\Ruaraidheulib.dll
+X:\Stuff\repos\reulib\Ruaraidheulib\bin\Release\Ruaraidheulib.pdb
+X:\Stuff\repos\reulib\Ruaraidheulib\obj\Release\Ruaraidheulib.csproj.CoreCompileInputs.cache
+X:\Stuff\repos\reulib\Ruaraidheulib\obj\Release\Ruaraidheulib.dll
+X:\Stuff\repos\reulib\Ruaraidheulib\obj\Release\Ruaraidheulib.pdb
+X:\Stuff\repos\reulib\Ruaraidheulib\obj\Release\Ruaraidheulib.Winforms.Card.resources
+X:\Stuff\repos\reulib\Ruaraidheulib\obj\Release\Ruaraidheulib.csproj.GenerateResource.Cache
