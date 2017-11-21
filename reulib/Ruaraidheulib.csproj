@@ -49,6 +49,7 @@
     <Compile Include="Games\Money.cs" />
     <Compile Include="Games\ThueMorse.cs" />
     <Compile Include="Multiarray.cs" />
+    <Compile Include="Networking\Netbase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Winforms\Card.cs">
       <SubType>UserControl</SubType>
