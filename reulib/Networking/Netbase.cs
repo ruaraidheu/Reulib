@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ruaraidheulib.Networking
 {
-    class Netbase
+    public class Netbase
     {
     }
 }
