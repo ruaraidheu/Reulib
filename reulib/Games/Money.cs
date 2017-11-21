@@ -51,6 +51,10 @@ namespace Ruaraidheulib.Games
             {
                 return "-" + symb + Math.Abs(val).PadToString(0, 2);
             }
+            else if (val == 0)
+            {
+                return symb + val.PadToString(1, 2);
+            }
             return symb + val.PadToString(0, 2);
         }
 
