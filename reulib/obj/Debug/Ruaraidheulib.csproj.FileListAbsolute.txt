@@ -6,3 +6,11 @@ X:\Stuff\repos\reulib\Ruaraidheulib\obj\Debug\Ruaraidheulib.dll
 X:\Stuff\repos\reulib\Ruaraidheulib\obj\Debug\Ruaraidheulib.pdb
 X:\Stuff\repos\reulib\Ruaraidheulib\obj\Debug\Ruaraidheulib.Winforms.Card.resources
 X:\Stuff\repos\reulib\Ruaraidheulib\obj\Debug\Ruaraidheulib.csproj.GenerateResource.Cache
+X:\Stuff\repos\reulib\reulib\reulib\bin\Debug\Ruaraidheulib.dll
+X:\Stuff\repos\reulib\reulib\reulib\bin\Debug\Ruaraidheulib.pdb
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csprojResolveAssemblyReference.cache
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.Winforms.Card.resources
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csproj.GenerateResource.Cache
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csproj.CoreCompileInputs.cache
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.dll
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.pdb
