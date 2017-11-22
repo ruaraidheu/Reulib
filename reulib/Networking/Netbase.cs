@@ -36,14 +36,20 @@ namespace Ruaraidheulib.Networking
         NetSync ns;
         List<object> netdata;
         List<Threeint> netspaces;
+        List<Thread> threads;
 
         NetType nt;
         AllocPeriod ap;
-        public NetHost(NetType nettype)
+        bool run;
+        int threadc;
+        public NetHost(NetType nettype, int connections)
         {
             nt = nettype;
             ap = AllocPeriod.Open;
+            run = false;
+            threadc = connections;
         }
+        #region API
         public enum NetType
         {
             Host, Client, Level
@@ -52,6 +58,52 @@ namespace Ruaraidheulib.Networking
         {
             Open, Protected, Closed
         }
+
+
+
+        public void CloseAllocPeriod()
+        {
+            ap = AllocPeriod.Closed;
+        }
+        public bool ReopenAllocPeriod()
+        {
+            if (!run)
+            {
+                ap = AllocPeriod.Open;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool StartNet()
+        {
+            if (ap != AllocPeriod.Open)
+            {
+                run = true;
+                Loop.For(() =>
+                {
+
+                }, threadc);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void StopNet()
+        {
+            foreach (Thread t in threads)
+            {
+                t.Abort();
+            }
+            run = false;
+        }
+        #endregion
+        #region NetSpace
         /// <summary>
         /// Returns ID of your space
         /// </summary>
@@ -116,6 +168,7 @@ namespace Ruaraidheulib.Networking
                 }
             }
         }
+        #endregion
         #region IO
         public void Send()
         {
@@ -125,16 +178,13 @@ namespace Ruaraidheulib.Networking
             byte[] data;
             data = cli.Receive(ref sender);
 
-            //Console.WriteLine("Message received from {0}:", sender.ToString());
-            //Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
-
             object se = Netbase.FromBytes(data);
             if (se is NetSync)
             {
                 NetSync sen = (NetSync)se;
                 if (sen.ID() == Netbase.getID())
                 {
-                    while (true)
+                    while (run)
                     {
                         data = Netbase.ToBytes(ns);
                         cli.Send(data, data.Length, sender);
@@ -156,15 +206,10 @@ namespace Ruaraidheulib.Networking
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
             byte[] data;
             data = newsock.Receive(ref sender);
-
-            Console.WriteLine("Message received from {0}:", sender.ToString());
-            Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
-
-            string welcome = "Welcome to my test server";
-            data = Encoding.ASCII.GetBytes(welcome);
+            
             newsock.Send(data, data.Length, sender);
 
-            while (true)
+            while (run)
             {
                 data = newsock.Receive(ref sender);
                 Netbase.FromBytes(data);

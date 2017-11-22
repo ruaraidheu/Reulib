@@ -10,11 +10,12 @@ namespace Ruaraidheulib.Games
     {
         long val = 0;
         string symb = "$";
+        string div = ",";
         public Money()
         {
 
         }
-        public Money(string symbol)
+        public Money(string symbol, string dividor = ",")
         {
             symb = symbol;
         }
@@ -49,13 +50,13 @@ namespace Ruaraidheulib.Games
         {
             if (val < 0)
             {
-                return "-" + symb + Math.Abs(val).PadToString(0, 2);
+                return "-" + symb + string.Format("{0:n2}", Math.Abs(val));
             }
             else if (val == 0)
             {
                 return symb + val.PadToString(1, 2);
             }
-            return symb + val.PadToString(0, 2);
+            return symb + string.Format("{0:n2}", val);
         }
 
         public override string ToString()
