@@ -165,6 +165,51 @@ namespace Ruaraidheulib
                 set { _y = value; }
             }
         }
+        public struct Threeint
+        {
+            public Threeint(int x, int y, int z)
+            {
+                _x = x;
+                _y = y;
+                _z = z;
+            }
+            public int _x;
+            public int _y;
+            public int _z;
+            public int X
+            {
+                get { return _x; }
+                set { _x = value; }
+            }
+            public int Y
+            {
+                get { return _y; }
+                set { _y = value; }
+            }
+            public int Z
+            {
+                get { return _z; }
+                set { _z = value; }
+            }
+        }
+        public struct Fourint
+        {
+            public Fourint(int x, int y, int z, int w)
+            {
+                _x = x;
+                _y = y;
+                _z = z;
+                _w = w;
+            }
+            public int _x;
+            public int _y;
+            public int _z;
+            public int _w;
+            public int X { get { return _x; } set { _x = value; } }
+            public int Y { get { return _y; } set { _y = value; } }
+            public int Z { get { return _z; } set { _z = value; } }
+            public int W { get { return _w; } set { _w = value; } }
+        }
     }
     #region Loops
     public static class Loop
@@ -324,10 +369,10 @@ namespace Ruaraidheulib
         }
         public void GetObject(out int x, out int y, out int width, out int height)
         {
-            x = (int)(relx *_contwidth);
-            y = (int)(rely *_contheight);
-            width = (int)(relw*_contwidth);
-            height = (int)(relh*_contheight);
+            x = (int)(relx * _contwidth);
+            y = (int)(rely * _contheight);
+            width = (int)(relw * _contwidth);
+            height = (int)(relh * _contheight);
         }
         public void GetValues(out int x, out int y, out int width, out int height)
         {
