@@ -430,7 +430,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                                      }
                                      else
                                      {
-                                         str += "[" + sc + "-Args: " + cm.args[i].Count + "] ";
+                                         str += "[" + sc + /*"-Args: " + cm.args[i].Count +*/ "] ";
                                      }
                                  });
                                 wl(cm.command + " " + str);
