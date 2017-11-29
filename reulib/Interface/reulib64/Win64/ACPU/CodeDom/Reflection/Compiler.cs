@@ -204,6 +204,9 @@ namespace Ruaraidheulib.Interface.reulib.Win64.ACPU.CodeDom.Reflection
 
     public class REUSTagCompiler
     {
-        public static 
+        public static void CompileFromScratch()
+        {
+
+        }
     }
 }
