@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,11 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beta\reUI.cs" />
+    <Compile Include="Beta\SerialiseDelagate.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Games\Card.cs" />
     <Compile Include="Games\Dice.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Games\Money.cs" />
     <Compile Include="Games\ThueMorse.cs" />
+    <Compile Include="Interface\reulib64\Win64\ACPU\CodeDom\Reflection\Compiler.cs" />
+    <Compile Include="Interface\reulib64\IO\FileHelper.cs" />
+    <Compile Include="Interface\Obsolete\Extentions.cs" />
+    <Compile Include="Interface\Win32\Registry.cs" />
+    <Compile Include="Interface\reulib64\Win64\Console\CommandParsing.cs" />
+    <Compile Include="Interface\reulib64\Win64\Console\TagParsing.cs" />
     <Compile Include="Multiarray.cs" />
     <Compile Include="Networking\Netbase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

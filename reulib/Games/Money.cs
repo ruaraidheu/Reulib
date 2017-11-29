@@ -18,6 +18,7 @@ namespace Ruaraidheulib.Games
         public Money(string symbol, string dividor = ",")
         {
             symb = symbol;
+            div = dividor;
         }
 
         public void Add(long value)
@@ -46,17 +47,23 @@ namespace Ruaraidheulib.Games
         {
             return (int)val;
         }
-        public string GetString()
+        public string GetString(string dividor)
         {
+            string s;
             if (val < 0)
             {
-                return "-" + symb + string.Format("{0:n2}", Math.Abs(val));
+                s = "-" + symb + string.Format("{0:n2}", Math.Abs(val));
             }
             else if (val == 0)
             {
-                return symb + val.PadToString(1, 2);
+                s = symb + val.PadToString(1, 2);
             }
-            return symb + string.Format("{0:n2}", val);
+            s = symb + string.Format("{0:n2}", val);
+            return s.Replace(",", dividor);
+        }
+        public string GetString()
+        {
+            return GetString(div);
         }
 
         public override string ToString()

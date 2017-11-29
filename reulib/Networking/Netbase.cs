@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using static Ruaraidheulib.List;
+using static Ruaraidheulib.Interface.Obsolete.List;
 
 namespace Ruaraidheulib.Networking
 {
@@ -35,7 +36,8 @@ namespace Ruaraidheulib.Networking
     {
         NetSync ns;
         List<object> netdata;
-        List<Threeint> netspaces;
+#pragma warning disable CS0612 // Type or member is obsolete
+        List<Interface.Obsolete.List.Threeint> netspaces;
         List<Thread> threads;
 
         NetType nt;
@@ -48,6 +50,9 @@ namespace Ruaraidheulib.Networking
             ap = AllocPeriod.Open;
             run = false;
             threadc = connections;
+            netdata = new List<object>();
+            netspaces = new List<Interface.Obsolete.List.Threeint>();
+            threads = new List<Thread>();
         }
         #region API
         public enum NetType
@@ -113,7 +118,7 @@ namespace Ruaraidheulib.Networking
         {
             if (ap == AllocPeriod.Open)
             {
-                Threeint sd = new Threeint();
+                Interface.Obsolete.List.Threeint sd = new Interface.Obsolete.List.Threeint();
                 sd.X = netspaces.Count;
                 sd.Y = netdata.Count;
                 Loop.For(() =>
@@ -137,7 +142,7 @@ namespace Ruaraidheulib.Networking
             }
             else
             {
-                Threeint ti = netspaces[ID];
+                Interface.Obsolete.List.Threeint ti = netspaces[ID];
                 object[] o = new object[ti.Z - ti.Y];
                 Loop.For((i) =>
                 {
@@ -154,7 +159,7 @@ namespace Ruaraidheulib.Networking
             }
             else
             {
-                Threeint ti = netspaces[ID];
+                Interface.Obsolete.List.Threeint ti = netspaces[ID];
                 if ((ti.Z - ti.Y) > o.Length)
                 {
                     Loop.For((i) =>

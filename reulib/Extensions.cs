@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Ruaraidheulib.Interface.Obsolete.List;
 
 namespace Ruaraidheulib
 {
@@ -62,6 +63,7 @@ namespace Ruaraidheulib
             }
             return false;
         }
+#pragma warning disable CS0618 // Type or member is obsolete
         public static bool FindDuplicates<T>(this IList<T> list, out List<Twoint> twoint)
         {
             List<Twoint> ti = new List<Twoint>();
@@ -125,6 +127,35 @@ namespace Ruaraidheulib
             arr.CopyTo(rout, tarr.Length);
             return rout;
         }
+        public static List<T> To1DList<T>(this List<List<T>> arr)
+        {
+            List<T> list;
+            list = new List<T>();
+            for (int i = 0; i < arr.Count; i++)
+            {
+                for (int j = 0; j < arr[i].Count; j++)
+                {
+                    list.Add(arr[i][j]);
+                }
+            }
+            return list;
+        }
+        public static List<T> To1DList<T>(this List<List<List<T>>> arr)
+        {
+            List<T> list;
+            list = new List<T>();
+            for (int i = 0; i < arr.Count; i++)
+            {
+                for (int j = 0; j < arr[i].Count; j++)
+                {
+                    for (int k = 0; k < arr[i][j].Count; k++)
+                    {
+                        list.Add(arr[i][j][k]);
+                    }
+                }
+            }
+            return list;
+        }
         public static List<T> To1DList<T>(this T[] arr)
         {
             List<T> list = arr.Cast<T>().ToList();
@@ -145,6 +176,7 @@ namespace Ruaraidheulib
             List<T> list = arr.Cast<T>().ToList();
             return list;
         }
+        [Obsolete("Replace with Interface.Obsolete.List")]
         public struct Twoint
         {
             public Twoint(int x, int y)
@@ -165,6 +197,7 @@ namespace Ruaraidheulib
                 set { _y = value; }
             }
         }
+        [Obsolete("Replace with Interface.Obsolete.List")]
         public struct Threeint
         {
             public Threeint(int x, int y, int z)
@@ -192,6 +225,7 @@ namespace Ruaraidheulib
                 set { _z = value; }
             }
         }
+        [Obsolete("Replace with Interface.Obsolete.List")]
         public struct Fourint
         {
             public Fourint(int x, int y, int z, int w)
@@ -211,6 +245,52 @@ namespace Ruaraidheulib
             public int W { get { return _w; } set { _w = value; } }
         }
     }
+    public struct TwoT<T>
+    {
+        public TwoT(T x, T y)
+        {
+            _x = x;
+            _y = y;
+        }
+        T _x;
+        T _y;
+        public T X { get { return _x; } set { _x = value; } }
+        public T Y { get { return _y; } set { _y = value; } }
+    }
+    public struct ThreeT<T>
+    {
+        public ThreeT(T x, T y, T z)
+        {
+            _x = x;
+            _y = y;
+            _z = z;
+        }
+        T _x;
+        T _y;
+        T _z;
+        public T X { get { return _x; } set { _x = value; } }
+        public T Y { get { return _y; } set { _y = value; } }
+        public T Z { get { return _z; } set { _z = value; } }
+    }
+    public struct FourT<T>
+    {
+        public FourT(T x, T y, T z, T w)
+        {
+            _x = x;
+            _y = y;
+            _z = z;
+            _w = w;
+        }
+        T _x;
+        T _y;
+        T _z;
+        T _w;
+        public T X { get { return _x; } set { _x = value; } }
+        public T Y { get { return _y; } set { _y = value; } }
+        public T Z { get { return _z; } set { _z = value; } }
+        public T W { get { return _w; } set { _w = value; } }
+    }
+
     #region Loops
     public static class Loop
     {
@@ -322,66 +402,6 @@ namespace Ruaraidheulib
     }
     #endregion
 
-    [Obsolete("Use Winforms.Relative")]
-    public class LRelative
-    {
-        int _x, _y, _width, _height, _contwidth, _contheight;
-        double relx, rely, relw, relh;
-
-        public LRelative(int x, int y, int width, int height, int contwidth, int contheight)
-        {
-            _x = x;
-            _y = y;
-            _width = width;
-            _height = height;
-            _contwidth = contwidth;
-            _contheight = contheight;
-            relx = (double)_x / (double)_contwidth;
-            rely = (double)_y / (double)_contheight;
-            relw = (double)_width / (double)_contwidth;
-            relh = (double)_height / (double)_contheight;
-        }
-        public void UpdateObject(int x, int y, int width, int height)
-        {
-            _x = x;
-            _y = y;
-            _width = width;
-            _height = height;
-        }
-        public void CastOut()
-        {
-            _x = (int)(relx * _contwidth);
-            _y = (int)(rely * _contheight);
-            _width = (int)(relw * _contwidth);
-            _height = (int)(relh * _contheight);
-        }
-        public void CastIn()
-        {
-            relx = (double)_x / (double)_contwidth;
-            rely = (double)_y / (double)_contheight;
-            relw = (double)_width / (double)_contwidth;
-            relh = (double)_height / (double)_contheight;
-        }
-        public void UpdateContainer(int contwidth, int contheight)
-        {
-            _contwidth = contwidth;
-            _contheight = contheight;
-        }
-        public void GetObject(out int x, out int y, out int width, out int height)
-        {
-            x = (int)(relx * _contwidth);
-            y = (int)(rely * _contheight);
-            width = (int)(relw * _contwidth);
-            height = (int)(relh * _contheight);
-        }
-        public void GetValues(out int x, out int y, out int width, out int height)
-        {
-            x = _x;
-            y = _y;
-            width = _width;
-            height = _height;
-        }
-    }
     public static class String
     {
         /// <summary>
@@ -433,6 +453,50 @@ namespace Ruaraidheulib
         {
             System.Double.TryParse(str, out double a);
             return a;
+        }
+        public static string[] Split(this string str, params string[] split)
+        {
+            return str.Split(split, StringSplitOptions.None);
+        }
+        public static string[] Split(this string str, StringSplitOptions options, params string[] split)
+        {
+            return str.Split(split, options);
+        }
+        public static string IfStartAndRemove(this string s, string target)
+        {
+            if (s.StartsWith(target))
+            {
+                return s.Remove(0, target.Length);
+            }
+            return s;
+        }
+        public static string IfEndAndRemove(this string s, string target)
+        {
+            if (s.EndsWith(target))
+            {
+                return s.Remove(s.Length - target.Length, target.Length);
+            }
+            return s;
+        }
+        public static bool IsStartAndRemove(this string s, out string str, string target)
+        {
+            if (s.StartsWith(target))
+            {
+                str = s.Remove(0, target.Length);
+                return true;
+            }
+            str = s;
+            return false;
+        }
+        public static bool IsEndAndRemove(this string s, out string str, string target)
+        {
+            if (s.EndsWith(target))
+            {
+                str = s.Remove(s.Length - target.Length, target.Length);
+                return true;
+            }
+            str = s;
+            return false;
         }
     }
     #region Numbers
