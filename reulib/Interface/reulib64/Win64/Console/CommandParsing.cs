@@ -207,6 +207,17 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             }
             return false;
         }
+        public bool IsSub(string subcom)
+        {
+            for (int i = 0; i < subcommand.Count; i++)
+            {
+                if (IsAlias(subcom, i))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void AliasSubcommand(string sc, string alias)
         {
             for (int i = 0; i < subcommand.Count; i++)
@@ -380,6 +391,10 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
         }
         public void Host(bool disableexit = false, bool casesensitive = false, bool displayline = true)
         {
+            Host(new List<string>(), disableexit, casesensitive, displayline);
+        }
+        public void Host(List<string> autoexec, bool disableexit = false, bool casesensitive = false, bool displayline = true)
+        {
             if (displine)
             {
                 bool hosting = true;
@@ -402,7 +417,13 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                     wl("");
                     w(">");
                     CommandArgs c;
-                    if (casesensitive)
+                    if (autoexec.Count > 0)
+                    {
+                        c = Read(autoexec[0], out print);
+                        wl(print);
+                        autoexec.RemoveAt(0);
+                    }
+                    else if (casesensitive)
                     {
                         c = Read(rl(), out print);
                         wl(print);
@@ -501,6 +522,22 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                 }
             }
             return false;
+        }
+    }
+    public class StringManager
+    {
+        string s = "";
+        public void WriteLine(string text)
+        {
+            s += Environment.NewLine + text;
+        }
+        public void Write(string text)
+        {
+            s += text;
+        }
+        public override string ToString()
+        {
+            return s;
         }
     }
 }
