@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ruaraidheulib.Interface.reulib.Win64.ACPU.CodeDom.Reflection
+namespace Ruaraidheulib.Interface.reulib64.Win64.ACPU.CodeDom.Reflection
 {
     public class CSPureCompiler
     {
