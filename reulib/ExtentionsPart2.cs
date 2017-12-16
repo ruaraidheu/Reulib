@@ -933,7 +933,7 @@ namespace Ruaraidheulib
         /// <param name="result">The new projection <see cref="matrix"/> for perspective view with FOV as an output parameter.</param>
         public static void CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance, out matrix result)
         {
-            if ((fieldOfView <= 0d) || (fieldOfView >= k.doub_Pi))
+            if ((fieldOfView <= 0d) || (fieldOfView >= k.Pi_d))
             {
                 throw new ArgumentException("fieldOfView <= 0 or >= PI");
             }

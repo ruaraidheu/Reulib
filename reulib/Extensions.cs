@@ -2668,14 +2668,14 @@ namespace Ruaraidheulib
         public const decimal Root2 = 1.4142135623730950488016887242097M;
         public const decimal Phi = 1.6180339887498948482045868343656M;
         public const double doub_E = 2.7182818284590452353602874713527;
-        public const double doub_Log10E = 0.43429448190325182765112891891661;
-        public const double doub_Log2E = 1.4426950408889634073599246810019;
-        public const double doub_Pi = 3.1415926535897932384626433832795;
-        public const double doub_PiOver2 = 1.5707963267948966192313216916398;
-        public const double doub_PiOver4 = 0.78539816339744830961566084581988;
-        public const double doub_Tau = 6.2831853071795864769252867665590;
-        public const double doub_Root2 = 1.4142135623730950488016887242097;
-        public const double doub_Phi = 1.6180339887498948482045868343656;
+        public const double Log10E_d = 0.43429448190325182765112891891661;
+        public const double Log2E_d = 1.4426950408889634073599246810019;
+        public const double Pi_d = 3.1415926535897932384626433832795;
+        public const double PiOver2_d = 1.5707963267948966192313216916398;
+        public const double PiOver4_d = 0.78539816339744830961566084581988;
+        public const double Tau_d = 6.2831853071795864769252867665590;
+        public const double Root2_d = 1.4142135623730950488016887242097;
+        public const double Phi_d = 1.6180339887498948482045868343656;
 
         public static double Hermite(double value1, double tangent1, double value2, double tangent2, double amount)
         {
@@ -2931,6 +2931,7 @@ namespace Ruaraidheulib
         }
         #endregion
         #region Rand
+        public static Random rng = new Random();
         public static ulong GetCryptoRand()
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
@@ -2982,19 +2983,53 @@ namespace Ruaraidheulib
         }
         public static int GetRand()
         {
-            return new Random().Next();
+            return rng.Next();
         }
         public static int GetRand(int max)
         {
-            return new Random().Next(max);
+            return rng.Next(max);
         }
         public static int GetRand(int min, int max)
         {
-            return new Random().Next(min, max);
+            return rng.Next(min, max);
         }
         public static double GetRandD()
         {
-            return new Random().NextDouble();
+            return rng.NextDouble();
+        }
+        public static List<int> CreateStableRandList(int max, int nonums, int target)
+        {
+#warning Incomplete Method
+            int min = 0;
+            int total = max * nonums;
+            int lmin = min;
+            int lmax = max;
+            int remains = target;
+            if (target >= total || target < 0) { throw new Exception("Target out of bounds."); }
+            List<int> ret = new List<int>();
+            for (int i = 1; i <= nonums; i++)
+            {
+                lmax = remains - ((nonums - i) * min);
+                if (lmax > max)
+                    lmax = max;
+
+                lmin = remains - ((nonums - i) * max);
+                if (lmin > min)
+                    lmin = min;
+
+                int nextDigit = k.GetRand(lmin, lmax);
+                ret.Add(nextDigit);
+                remains -= nextDigit;
+            }
+            ret.Shuffle();
+            int tot=0;
+            foreach(int j in ret)
+            {
+                tot += j;
+                k.wr(j+", ");
+            }
+            k.w("Add: " +tot);
+            return ret;
         }
         #endregion
         #region Abs

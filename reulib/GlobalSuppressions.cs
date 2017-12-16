@@ -14,3 +14,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Ruaraidheulib.Networking.Netbase.getID~System.String")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Ruaraidheulib.Networking.Netbase.setID(System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type", Target = "~T:Ruaraidheulib.Interface.Win32.System.Numerics.Replacement.bigint")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type", Target = "~T:Ruaraidheulib.nt`1")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0018:Inline variable declaration", Justification = "<Pending>", Scope = "member", Target = "~M:Ruaraidheulib.vector3.Distance(Ruaraidheulib.vector3,Ruaraidheulib.vector3)~System.Double")]
