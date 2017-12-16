@@ -48,6 +48,59 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             }
             return ret;
         }
+        public static string[] CTags(string data, string ftag, string etag)
+        {
+            string[] dat1 = data.Split(new string[] { ftag, etag }, StringSplitOptions.None);
+            string[] ret;
+            if (dat1.Length <= 1)
+            {
+                ret = new string[] { data };
+            }
+            else
+            {
+                if (dat1.Length % 2 == 0)
+                {
+                    ret = new string[(dat1.Length) / 2];
+                    Loop.For((i) =>
+                    {
+                        ret[i] = dat1[(i * 2) + 1];
+                    }
+                    , ret.Length);
+                }
+                else
+                {
+                    ret = new string[(dat1.Length - 1) / 2];
+                    Loop.For((i) =>
+                    {
+                        ret[i] = dat1[(i * 2) + 1];
+                    }
+                    , ret.Length);
+                }
+            }
+            return ret;
+        }
+        public static string CWTags(string[] data, bool isdiv, string div = "|")
+        {
+            string[] add = data;
+            string ret = "";
+            Loop.For((i) =>
+            {
+                if (i == 0)
+                {
+                    ret += add[i];
+                }
+                else if (isdiv)
+                {
+                    ret += (div + add[i]);
+                }
+                else
+                {
+                    ret += add[i];
+                }
+            }
+            , add.Length);
+            return ret;
+        }
         public static string WTags(string data, string tag, bool isdiv, string div = "|")
         {
             string[] add = Tags(data, tag);
@@ -103,6 +156,13 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             }
             return ret;
         }
+        /// <summary>
+        /// Splits a string into a list of tags.
+        /// </summary>
+        /// <param name="data">String with tags.</param>
+        /// <param name="tag">The tag that you want the data from.</param>
+        /// <exception cref="InvalidTagConfigurationException">Thrown when...</exception>
+        /// <returns>stuff</returns>
         public static List<string> OrderedTags(string data, string tag)
         {
             string[] dat1 = data.Split("<" + tag + ">");

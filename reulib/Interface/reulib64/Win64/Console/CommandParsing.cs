@@ -83,6 +83,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
     public class CommandArgs
     {
         public string command;
+        public bool? argcount = false;
         public List<string> subcommand;
         public List<List<string>> scbinds;
         public List<List<string>> args;
@@ -123,7 +124,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             , subcommand.Count);
             Loop.For((i) => { scbinds[i].Add(subcommand[i]); }, subcommand.Count);
         }
-        public CommandArgs(string initialcommand, params Subcommand[] subcommands)
+        public CommandArgs(string initialcommand, uint icommargcount, params Subcommand[] subcommands)
         {
             command = initialcommand;
             List<Subcommand> tmp = subcommands.To1DList();
@@ -143,15 +144,28 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             }
             , subcommand.Count);
             Loop.For((i) => { scbinds[i].Add(subcommand[i]); }, subcommand.Count);
+            argcount = true;
+
+            if (icommargcount > 2147483647)
+            {
+                argcount = null;
+            }
+            else
+            {
+                for (int i = 0; i < icommargcount; i++)
+                {
+                    args[0].Add("");
+                }
+            }
             Loop.For((i) =>
             {
                 Loop.For(() =>
                 {
-                    args[i].Add("");
+                    args[i+1].Add("");
                 }
                 , tmp[i].arg);
             }
-            , args.Count);
+            , subcommand.Count-1);
         }
         public bool IsSubcommand(string sc, out int loc)
         {
@@ -326,7 +340,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
         {
             if (delagate)
             {
-                throw new Exception("Delegate required.");
+                throw new Exception("Delegate required. Disable it in constructor if you don't need it.");
             }
             else
             {
@@ -398,7 +412,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             if (displine)
             {
                 bool hosting = true;
-                Add(new CommandArgs("alias"), (t)=> 
+                Add(new CommandArgs("alias", 2), (t)=> 
                 {
                     if (t.args[0].Count >= 2)
                     {
@@ -411,6 +425,14 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                     }
                 });
                 AddAlias("alias", "bind");
+                Add(new CommandArgs("autoexec", 4000000000), (t) =>
+                {
+                    for (int i = 0; i < t.args[0].Count; i++)
+                    {
+                        autoexec.Add(t.args[0][i]);
+                    }
+                    return "Added Autoexec";
+                });
                 while (hosting)
                 {
                     string print;
@@ -438,6 +460,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                         if (c.command.ToLower() == "help")
                         {
                             wl("Help:");
+                            wl("");
                             wl("help");
                             wl("exit");
                             Loop.Foreach<CommandArgs>(possibles, (cm, j) =>
@@ -445,13 +468,38 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
                                 string str = "";
                                 Loop.Foreach<string>(cm.subcommand, (sc, i) =>
                                  {
-                                     if (i == 0)
+                                     if (cm.argcount == true)
                                      {
-                                         str += "[BaseCommand-Args: " + cm.args[i].Count + "] ";
+                                         if (i == 0)
+                                         {
+                                             str += "[BaseCommand-Args: " + cm.args[i].Count + "] ";
+                                         }
+                                         else
+                                         {
+                                             str += "[" + sc + "-Args: " + cm.args[i].Count + "] ";
+                                         }
+                                     }
+                                     else if (cm.argcount == null)
+                                     {
+                                         if (i == 0)
+                                         {
+                                             str += "[BaseCommand-Args: Unlimited] ";
+                                         }
+                                         else
+                                         {
+                                             str += "[" + sc + "-Args: " + cm.args[i].Count + "] ";
+                                         }
                                      }
                                      else
                                      {
-                                         str += "[" + sc + /*"-Args: " + cm.args[i].Count +*/ "] ";
+                                         if (i == 0)
+                                         {
+                                             str += "[BaseCommand] ";
+                                         }
+                                         else
+                                         {
+                                             str += "[" + sc + "] ";
+                                         }
                                      }
                                  });
                                 wl(cm.command + " " + str);

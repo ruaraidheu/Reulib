@@ -147,11 +147,11 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.ACPU.CodeDom.Reflection
                 {
                     namesp = data[0];
                 }
-                else if (data.Length >= 2)
+                if (data.Length >= 2)
                 {
                     cla = data[1];
                 }
-                else if (data.Length >= 3)
+                if (data.Length >= 3)
                 {
                     method = data[2];
                 }
