@@ -54,6 +54,7 @@
     <Compile Include="Games\Money.cs" />
     <Compile Include="Games\ThueMorse.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interface\reulib64\GameObjects\Primitives.cs" />
     <Compile Include="Interface\reulib64\Win64\ACPU\CodeDom\Reflection\Compiler.cs" />
     <Compile Include="Interface\reulib64\IO\FileHelper.cs" />
     <Compile Include="Interface\Obsolete\Extentions.cs" />

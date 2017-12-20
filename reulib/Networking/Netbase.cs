@@ -33,7 +33,7 @@ namespace Ruaraidheulib.Networking
         }
     }
     public class NetHost
-    {//. Not assigned
+    {   //. Not assigned
         NetSync ns = new NetSync();
         List<object> netdata;
 #pragma warning disable CS0612 // Type or member is obsolete

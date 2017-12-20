@@ -157,7 +157,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.ACPU.CodeDom.Reflection
                 }
                 code = TagDecoder.StripTags(code, "detail");
             }
-
+            
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CompilerParameters parameters = new CompilerParameters();
             parameters.ReferencedAssemblies.Add("System.dll");
@@ -165,7 +165,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.ACPU.CodeDom.Reflection
             {
                 parameters.ReferencedAssemblies.Add(sref);
             }
-
+            
             parameters.GenerateInMemory = true;
             parameters.GenerateExecutable = false;
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
