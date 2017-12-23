@@ -260,5 +260,50 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
             }
             return true;
         }
+
+        public static List<List<string>> OctoTag(string data, string def = "#")
+        {
+            List<List<string>> ret = new List<List<string>>();
+            string[] s0 = data.Split(def);
+            foreach (string s in s0)
+            {
+                ret.Add(new List<string>());
+                string[] s1 = s.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                foreach (string ss in s1)
+                {
+                    ret.Last().Add(ss);
+                }
+            }
+            return ret;
+        }
+
+        public static Dictionary<string, List<string>> OctoDTag(string data, string def = "#", string space = " ")
+        {
+            Dictionary<string, List<string>> ret = new Dictionary<string, List<string>>();
+            string[] s0 = data.Split(def);
+            foreach (string s in s0)
+            {
+                List<string> tmp = new List<string>();
+                string[] s1 = s.Split(space, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string ss in s1)
+                {
+                    tmp.Add(ss);
+                }
+                string t = tmp.GetIndex(0);
+                tmp.RemoveIndex(0);
+                ret.Add(t, tmp);
+            }
+            return ret;
+        }
+        public static List<string> OctoSingleTag(string data, string def = "#")
+        {
+            List<string> ret = new List<string>();
+            string[] s0 = data.Split(def, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in s0)
+            {
+                ret.Add(s);
+            }
+            return ret;
+        }
     }
 }

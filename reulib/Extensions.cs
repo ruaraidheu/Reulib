@@ -187,6 +187,24 @@ namespace Ruaraidheulib
         {
             return l.Length;
         }
+        public static T GetIndex<T>(this List<T> list, int index)
+        {
+            if (list.Count>index)
+            {
+                return list[index];
+            }
+            else
+            {
+                return default(T);
+            }
+        }
+        public static void RemoveIndex<T>(this List<T> list, int index)
+        {
+            if (list.Count > index)
+            {
+                list.RemoveAt(index);
+            }
+        }
         [Obsolete("Replace with Interface.Obsolete.List")]
         public struct Twoint
         {
@@ -2613,6 +2631,10 @@ namespace Ruaraidheulib
         {
             return str.Split(split, StringSplitOptions.None);
         }
+        public static string[] Split(this string str, string split, StringSplitOptions options)
+        {
+            return str.Split(options, split);
+        }
         public static string[] Split(this string str, StringSplitOptions options, params string[] split)
         {
             return str.Split(split, options);
@@ -2652,6 +2674,21 @@ namespace Ruaraidheulib
             }
             str = s;
             return false;
+        }
+        public static string TwoCharHex(this string s)
+        {
+            if (s.Length == 1)
+            {
+                return "0" + s;
+            }
+            else if (s.Length == 0)
+            {
+                return "00";
+            }
+            else
+            {
+                return s;
+            }
         }
     }
     #region Numbers
@@ -2740,9 +2777,33 @@ namespace Ruaraidheulib
         {
             return value1 < value2 ? value2 : value1;
         }
+        public static double Max(double value1, double value2, params double[] values)
+        {
+            double max = Max(value1, value2);
+            foreach(double m in values)
+            {
+                if (m > max)
+                {
+                    max = m;
+                }
+            }
+            return max;
+        }
         public static double Min(double value1, double value2)
         {
             return value1 > value2 ? value2 : value1;
+        }
+        public static double Min(double value1, double value2, params double[] values)
+        {
+            double min = Min(value1, value2);
+            foreach (double m in values)
+            {
+                if (m > min)
+                {
+                    min = m;
+                }
+            }
+            return min;
         }
         public static double SmoothStep(double value1, double value2, double amount)
         {
@@ -2889,6 +2950,20 @@ namespace Ruaraidheulib
         {
             Console.WriteLine(s, arg);
         }
+        public static void w(string[] s)
+        {
+            foreach (string st in s)
+            {
+                Console.WriteLine(st);
+            }
+        }
+        public static void w(List<string> s)
+        {
+            foreach (string st in s)
+            {
+                Console.WriteLine(st);
+            }
+        }
         public static void wr(bool b)
         {
             Console.Write(b);
@@ -2928,6 +3003,20 @@ namespace Ruaraidheulib
         public static void wr(string s, params object[] arg)
         {
             Console.Write(s, arg);
+        }
+        public static void wr(string[] s)
+        {
+            foreach (string st in s)
+            {
+                Console.Write(st);
+            }
+        }
+        public static void wr(List<string> s)
+        {
+            foreach (string st in s)
+            {
+                Console.Write(st);
+            }
         }
         #endregion
         #region Rand
