@@ -1,16 +1,21 @@
 ﻿using Ruaraidheulib.Interface.reulib64.Win64.Console;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using sd = System.Drawing;
 
 namespace Ruaraidheulib.Interface.reulib64.GameObjects
 {
     /// <summary>
     /// Base Color Class, Inherit from ColorTypes
     /// </summary>
-    public class Color
+    [Serializable()]
+    public class Color : ISerializable
     {
         public byte r = 0;
         public byte g = 0;
@@ -18,8 +23,9 @@ namespace Ruaraidheulib.Interface.reulib64.GameObjects
         public byte a = 255;
         public Color(){}
         public Color(byte red, byte green, byte blue, byte alpha = 255) { r = red; g = green; b = blue; a = alpha; }
+        [XmlIgnore]
         public ColorTypes AsColorType { get { return new ColorTypes(r,g,b,a); } set { r = value.r; g = value.g; b = value.b; a = value.a; } }
-        public ChainObj AsChain<ChainObj>() where ChainObj : Color, new()
+        public virtual ChainObj AsChain<ChainObj>() where ChainObj : Color, new()
         {
             ChainObj obj = new ChainObj();
             obj.r = r;
@@ -37,7 +43,7 @@ namespace Ruaraidheulib.Interface.reulib64.GameObjects
             c.a = a;
             return c;
         }
-        public void FromChain<ChainObj>(ChainObj obj) where ChainObj : Color
+        public virtual void FromChain<ChainObj>(ChainObj obj) where ChainObj : Color
         {
             r = obj.r;
             g = obj.g;
@@ -53,6 +59,7 @@ namespace Ruaraidheulib.Interface.reulib64.GameObjects
             c.a = obj.a;
             return c;
         }
+        [XmlIgnore]
         public vector4 Double
         {
             get { return new vector4(r / 255.0, g / 255.0, b / 255.0, a / 255.0); }
@@ -64,9 +71,13 @@ namespace Ruaraidheulib.Interface.reulib64.GameObjects
                 a = (byte)(value.W * 255);
             }
         }
+        [XmlIgnore]
         public byte RedComponent   { get { return r; } set { r = value; } }
+        [XmlIgnore]
         public byte GreenComponent { get { return g; } set { g = value; } }
+        [XmlIgnore]
         public byte BlueComponent  { get { return b; } set { b = value; } }
+        [XmlIgnore]
         public byte AlphaComponent { get { return a; } set { a = value; } }
         public override string ToString()
         {
@@ -84,6 +95,30 @@ namespace Ruaraidheulib.Interface.reulib64.GameObjects
         public static Color Magenta          { get { return new Color(255, 000, 255, 255); } }
         public static Color Cyan             { get { return new Color(000, 255, 255, 255); } }
         public static Color CornflowerBlue   { get { return new Color(100, 149, 237, 255); } }
+
+        public static implicit operator Color(sd.Color c)
+        {
+            return new Color(c.R, c.G, c.B, c.A);
+        }
+        public static implicit operator sd.Color(Color c)
+        {
+            return sd.Color.FromArgb(c.a, c.r, c.g, c.b);
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Red", r);
+            info.AddValue("Green", g);
+            info.AddValue("Blue", b);
+            info.AddValue("Alpha", a);
+        }
+        public Color(SerializationInfo info, StreamingContext context)
+        {
+            r = (byte)info.GetByte("Red");
+            g = (byte)info.GetByte("Green");
+            b = (byte)info.GetByte("Blue");
+            a = (byte)info.GetByte("Alpha");
+        }
     }
     /// <summary>
     /// Color Extention Class

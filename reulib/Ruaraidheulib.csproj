@@ -58,6 +58,7 @@
     <Compile Include="Interface\reulib64\Win64\ACPU\CodeDom\Reflection\Compiler.cs" />
     <Compile Include="Interface\reulib64\IO\FileHelper.cs" />
     <Compile Include="Interface\Obsolete\Extentions.cs" />
+    <Compile Include="Interface\reulib64\Win64\Version\VersionInfo.cs" />
     <Compile Include="Interface\Win32\Registry.cs" />
     <Compile Include="Interface\reulib64\Win64\Console\CommandParsing.cs" />
     <Compile Include="Interface\reulib64\Win64\Console\TagParsing.cs" />

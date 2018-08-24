@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using sdraw = System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -2596,6 +2597,14 @@ namespace Ruaraidheulib
         public static bool operator !=(point a, point b)
         {
             return !a.Equals(b);
+        }
+        public static implicit operator point(sdraw.Point p)
+        {
+            return new point(p.X, p.Y);
+        }
+        public static implicit operator sdraw.Point(point p)
+        {
+            return new sdraw.Point(p.X, p.Y);
         }
 
         #endregion

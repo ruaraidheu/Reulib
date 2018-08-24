@@ -48,6 +48,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Console
         {
             return ParseCommandLine(commandline.Split(StringSplitOptions.RemoveEmptyEntries, " "));
         }
+        [Obsolete("I think")]
         public static CommandArgs AParseCommandLine(string[] commandline, string subcommandindicator)
         {
             CommandArgs ca = new CommandArgs();

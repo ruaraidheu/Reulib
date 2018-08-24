@@ -3245,6 +3245,14 @@ namespace Ruaraidheulib
         {
             return t = t < 0 ? -t : t;
         }
+        public static float Floor(this float t)
+        {
+            return (float)Math.Floor(t);
+        }
+        public static int Floori(this float t)
+        {
+            return (int)Math.Floor(t);
+        }
         public static string PadToString(this float num, int front, int end)
         {
             string s = ".";
