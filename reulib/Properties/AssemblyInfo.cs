@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.3")]
 [assembly: AssemblyInformationalVersion("1.0.0.3")]
 [assembly: TargetVersion("1.0.1.0")]
-[assembly: VersionSpecifier("Pre3")]
+[assembly: VersionSpecifier(PublishType.Development, 3)]

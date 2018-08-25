@@ -32,6 +32,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Version
         private string suitename;
         private string version;
         private string fullversion;
+        private bool usingmono;
         public static VersionInformation Get()
         {
             return new VersionInformation(Assembly.GetCallingAssembly(), Assembly.GetExecutingAssembly());
@@ -56,6 +57,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Version
             productname = Application.ProductName;
             suitename = "";
             version = "V" + versionnumber + " " + specifier;
+            usingmono = Type.GetType("Mono.Runtime") != null;
             if (VersionNumber != ProductVersion)
             {
                 fullversion = "V" + ProductVersion + "   Release: " + Version;
@@ -74,6 +76,7 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Version
         public string SuiteName { get { return suitename; } }
         public string Version { get { return version; } }
         public string FullVersion { get { return fullversion; } }
+        public bool Usingmono { get => usingmono; }
     }
     [AttributeUsage(AttributeTargets.Assembly)]
     public class TargetVersionAttribute : Attribute
@@ -89,14 +92,31 @@ namespace Ruaraidheulib.Interface.reulib64.Win64.Version
             return Text;
         }
     }
+    public enum PublishType
+    {
+        PreRelease = 1, Development = 2, Release = 3, Unstable = 4, Alpha = 5, Beta = 6, Gamma = 7, Nightly = 8, Patch = 9, Revision = 10, Debug = 11, Unusable = 12, None = 0
+    }
     [AttributeUsage(AttributeTargets.Assembly)]
     public class VersionSpecifierAttribute : Attribute
     {
         string text;
+        PublishType p;
         public VersionSpecifierAttribute() : this(string.Empty) { }
         public VersionSpecifierAttribute(string txt) { text = txt; }
+        public VersionSpecifierAttribute(PublishType pt) { p = pt; }
+        public VersionSpecifierAttribute(PublishType pt, int i) { p = pt; text = i.ToString(); }
+        public VersionSpecifierAttribute(PublishType pt, string txt) { p = pt; text = txt; }
 
-        public string Text { get => text; set => text = value; }
+        public string Text { get
+            {
+                switch (p)
+                {
+                    case PublishType.None: return text;
+                    case PublishType.PreRelease: return "Pre" + " " + text;
+                    case PublishType.Development: return "Dev" + " " + text;
+                    default: return p.ToString() + " " + text;
+                }
+            } set => text = value; }
 
         public override string ToString()
         {
