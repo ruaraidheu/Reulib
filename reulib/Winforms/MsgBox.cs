@@ -18,6 +18,18 @@ namespace Ruaraidheulib.Winforms
         {
             One, Two, Three, Four
         }
+        /// <summary>
+        /// Shows a Message dialog.
+        /// </summary>
+        /// <param name="msg">Text that the dialog displays</param>
+        /// <param name="title">Text in the title bar</param>
+        /// <param name="buttonlayout">How many buttons are displayed</param>
+        /// <param name="defaultbutton">Accept button</param>
+        /// <param name="button1">Text on button one</param>
+        /// <param name="button2">Text on button two</param>
+        /// <param name="button3">Text on button three</param>
+        /// <param name="button4">Text on button four</param>
+        /// <returns>Text of the button that was clicked</returns>
         public static string Show(string msg, string title, ButtonLayout buttonlayout, ButtonLayout defaultbutton, string button1, string button2 = "", string button3 = "", string button4 = "")
         {
             using (MsgBox m = new MsgBox(msg, title, buttonlayout, defaultbutton, button1, button2, button3, button4))
@@ -25,6 +37,89 @@ namespace Ruaraidheulib.Winforms
                 m.UsingRECompute = true;
                 m.ShowDialog();
                 return m.response;
+            }
+        }
+        /// <summary>
+        /// Shows a Message dialog.
+        /// </summary>
+        /// <param name="msg">Text that the dialog displays</param>
+        /// <returns>Text of the button that was clicked</returns>
+        public static string Show(string msg)
+        {
+            using (MsgBox m = new MsgBox(msg, "", ButtonLayout.One, ButtonLayout.One, "OK", "", "", ""))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.response;
+            }
+        }
+        /// <summary>
+        /// Shows a Message dialog.
+        /// </summary>
+        /// <param name="msg">Text that the dialog displays</param>
+        /// <param name="title">Text in the title bar</param>
+        /// <returns>Text of the button that was clicked</returns>
+        public static string Show(string msg, string title)
+        {
+            using (MsgBox m = new MsgBox(msg, title, ButtonLayout.One, ButtonLayout.One, "OK", "", "", ""))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.response;
+            }
+        }
+        /// <summary>
+        /// Shows a Message dialog.
+        /// </summary>
+        /// <param name="msg">Text that the dialog displays</param>
+        /// <param name="title">Text in the title bar</param>
+        /// <param name="button1">Text on button one</param>
+        /// <returns>Text of the button that was clicked</returns>
+        public static string Show(string msg, string title, string button1)
+        {
+            using (MsgBox m = new MsgBox(msg, title, ButtonLayout.One, ButtonLayout.One, button1, "", "", ""))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.response;
+            }
+        }
+        /// <summary>
+        /// Shows a Message dialog.
+        /// </summary>
+        /// <param name="msg">Text that the dialog displays</param>
+        /// <param name="title">Text in the title bar</param>
+        /// <param name="bl">How many buttons are displayed</param>
+        /// <param name="button1">Text on button one</param>
+        /// <param name="button2">Text on button two</param>
+        /// <param name="button3">Text on button three</param>
+        /// <param name="button4">Text on button four</param>
+        /// <returns>Text of the button that was clicked</returns>
+        public static string Show(string msg, string title, ButtonLayout bl, string button1, string button2 = "", string button3 = "", string button4 = "")
+        {
+            using (MsgBox m = new MsgBox(msg, title, bl, ButtonLayout.One, button1, button2, button3, button4))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.response;
+            }
+        }
+        public static ButtonLayout ShowBL(string msg, string title, ButtonLayout buttonlayout, ButtonLayout defaultbutton, string button1, string button2 = "", string button3 = "", string button4 = "")
+        {
+            using (MsgBox m = new MsgBox(msg, title, buttonlayout, defaultbutton, button1, button2, button3, button4))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.responsebl;
+            }
+        }
+        public static ButtonLayout ShowBL(string msg)
+        {
+            using (MsgBox m = new MsgBox(msg, "", ButtonLayout.One, ButtonLayout.One, "OK", "", "", ""))
+            {
+                m.UsingRECompute = true;
+                m.ShowDialog();
+                return m.responsebl;
             }
         }
         public static string ErrorWrite(Exception e)
@@ -48,9 +143,10 @@ namespace Ruaraidheulib.Winforms
     internal partial class MsgBox : Form
     {
         public string response;
+        public ButtonLayout responsebl;
         int minwidth;
         int maxwidth = 486;
-        int minheight = 144;
+        int minheight = 106;
         int maxheight;
         bool debug = false;
         bool usingrecompute = true;
@@ -101,7 +197,7 @@ namespace Ruaraidheulib.Winforms
             RECompute();
             if (VersionInfo.Get().Usingmono)
             {
-                panel1.Hide();
+                panel1.BackColor = BackColor;
             }
         }
         public void RECompute()
@@ -113,10 +209,10 @@ namespace Ruaraidheulib.Winforms
                 case ButtonLayout.Three: button1.Show(); button2.Show(); button3.Show(); button4.Hide(); break;
                 case ButtonLayout.Four: button1.Show(); button2.Show(); button3.Show(); button4.Show(); break;
             }
-            int b1 = 165;
-            int b2 = 258;
-            int b3 = 391;
-            int b4 = 486;
+            int b1 = 149;
+            int b2 = 242;
+            int b3 = 340;
+            int b4 = 470;
             if (button1.Size.Width > 75)
             {
                 button1.Width = 75;
@@ -128,16 +224,13 @@ namespace Ruaraidheulib.Winforms
                 button3.Location = new Point(253, button3.Location.Y);
                 button4.Location = new Point(348, button4.Location.Y);
             }
-            if (button1.Size.Width > 75)
-            {
-                b1 = button1.Location.X + button1.Size.Width + 27;
-                button2.Location = new Point(b1 + 20, button2.Location.Y);
-                b2 = button2.Location.X + button2.Size.Width + 27;
-                button3.Location = new Point(b2 + 20, button3.Location.Y);
-                b3 = button3.Location.X + button3.Size.Width + 27;
-                button4.Location = new Point(b3 + 20, button4.Location.Y);
-                b4 = button4.Location.X + button4.Size.Width + button1.Location.X;
-            }
+            b1 = button1.Location.X + button1.Size.Width + button1.Location.X;
+            button2.Location = new Point((b1- button1.Location.X) + 20, button2.Location.Y);
+            b2 = button2.Location.X + button2.Size.Width + button1.Location.X;
+            button3.Location = new Point((b2- button1.Location.X) + 20, button3.Location.Y);
+            b3 = button3.Location.X + button3.Size.Width + button1.Location.X;
+            button4.Location = new Point((b3- button1.Location.X) + 20, button4.Location.Y);
+            b4 = button4.Location.X + button4.Size.Width + button1.Location.X;
             maxwidth = b4;
             Graphics g = textBox1.CreateGraphics();
             Size s2 = g.MeasureString(textBox1.Text, textBox1.Font, b4 - (textBox1.Location.X * 2)).ToSize();
@@ -226,24 +319,28 @@ namespace Ruaraidheulib.Winforms
         private void button1_Click(object sender, EventArgs e)
         {
             response = button1.Text;
+            responsebl = ButtonLayout.One;
             DialogResult = DialogResult.OK;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             response = button2.Text;
+            responsebl = ButtonLayout.Two;
             DialogResult = DialogResult.OK;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             response = button3.Text;
+            responsebl = ButtonLayout.Three;
             DialogResult = DialogResult.OK;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             response = button4.Text;
+            responsebl = ButtonLayout.Four;
             DialogResult = DialogResult.OK;
         }
     }

@@ -74,6 +74,7 @@
     <Compile Include="Winforms\Card.Designer.cs">
       <DependentUpon>Card.cs</DependentUpon>
     </Compile>
+    <Compile Include="Winforms\ComputeEngine.cs" />
     <Compile Include="Winforms\General.cs" />
     <Compile Include="Winforms\MsgBox.cs">
       <SubType>Form</SubType>
@@ -86,6 +87,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interface\reulib64\Helper\" />
     <Folder Include="XNA\" />
   </ItemGroup>
   <ItemGroup>
