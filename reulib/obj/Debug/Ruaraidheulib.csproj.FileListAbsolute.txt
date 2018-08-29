@@ -13,5 +13,5 @@ X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csproj.GenerateResou
 X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csproj.CoreCompileInputs.cache
 X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.dll
 X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.pdb
-X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csprojAssemblyReference.cache
 X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.Winforms.MsgBox.resources
+X:\Stuff\repos\reulib\reulib\reulib\obj\Debug\Ruaraidheulib.csprojAssemblyReference.cache

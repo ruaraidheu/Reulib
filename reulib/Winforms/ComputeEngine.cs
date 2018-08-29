@@ -226,6 +226,10 @@ namespace Ruaraidheulib.Winforms
             siz = size;
         }
     }
+    public interface IDataConstructor
+    {
+
+    }
     public interface IComputeEngine : IDisposable, ICloneable
     {
         void Center();
@@ -248,5 +252,7 @@ namespace Ruaraidheulib.Winforms
         void Position(UserControl uc, relativepoint position);
         void Position(UserControl uc, relativepoint position, relativepoint origin);
         void Position(UserControl uc, relativepoint position, relativepoint origin, container parent);
+
+        void SetDataConstructor(IDataConstructor data);
     }
 }

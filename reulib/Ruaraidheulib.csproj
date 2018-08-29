@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Beta\reUI.cs" />
     <Compile Include="Beta\SerialiseDelagate.cs" />
+    <Compile Include="Data\Serializer.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="ExtentionsPart2.cs" />
     <Compile Include="Games\Card.cs" />

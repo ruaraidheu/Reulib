@@ -125,17 +125,17 @@ namespace Ruaraidheulib.Winforms
         public static string ErrorWrite(Exception e)
         {
             string error = e.GetType().Name+" in " + e.Source + Environment.NewLine + Environment.NewLine
+                + "Message: " + e.Message + Environment.NewLine
                 + "Target Site: " + e.TargetSite + Environment.NewLine + Environment.NewLine
-                + "Stack Trace: " + e.StackTrace + Environment.NewLine + Environment.NewLine
-                + "Message: " + e.Message + Environment.NewLine;
+                + "Stack Trace: " + e.StackTrace + Environment.NewLine + Environment.NewLine;
             Exception ex = e;
             while (ex.InnerException != null)
             {
                 ex = ex.InnerException;
-                error += Environment.NewLine + "---Inner Exception---" + Environment.NewLine+ ex.GetType().Name + Environment.NewLine + Environment.NewLine
+                error += Environment.NewLine + "---Inner Exception---" + Environment.NewLine + ex.GetType().Name + Environment.NewLine + Environment.NewLine
+                + "Message: " + ex.Message + Environment.NewLine
                 + "Target Site: " + ex.TargetSite + Environment.NewLine + Environment.NewLine
-                + "Stack Trace: " + ex.StackTrace + Environment.NewLine + Environment.NewLine
-                + "Message: " + ex.Message + Environment.NewLine;
+                + "Stack Trace: " + ex.StackTrace + Environment.NewLine + Environment.NewLine;
             }
             return error;
         }
